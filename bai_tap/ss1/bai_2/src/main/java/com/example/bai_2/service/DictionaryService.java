@@ -4,6 +4,7 @@ import com.example.bai_2.model.Dictionary;
 import java.util.*;
 
 public class DictionaryService {
+
     private static Map<Integer, Dictionary> dictionaryServiceMap = new HashMap<>();
     static {
         dictionaryServiceMap.put(1, new Dictionary("Chicken","Con gà"));
