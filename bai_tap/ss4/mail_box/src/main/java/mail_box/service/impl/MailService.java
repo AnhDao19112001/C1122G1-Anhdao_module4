@@ -1,14 +1,15 @@
-package mail_box.bai_1.service;
+package mail_box.service.impl;
 
-import mail_box.bai_1.model.Mail;
-import mail_box.bai_1.repository.IMailRepository;
+import mail_box.model.Mail;
+import mail_box.repository.IMailRepository;
+import mail_box.service.IMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MailService implements IMailService{
+public class MailService implements IMailService {
     @Autowired
     private IMailRepository iMailRepository;
     @Override

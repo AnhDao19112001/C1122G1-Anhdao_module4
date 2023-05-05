@@ -3,13 +3,15 @@ package com.example.bai_tap_3.service;
 import com.example.bai_tap_3.model.Product;
 import com.example.bai_tap_3.repository.IProductRepository;
 import com.example.bai_tap_3.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ProductService implements IProductService {
-    private final IProductRepository iProductRepository = new ProductRepository();
+    @Autowired
+    private IProductRepository iProductRepository;
 
     @Override
     public List<Product> findAll() {

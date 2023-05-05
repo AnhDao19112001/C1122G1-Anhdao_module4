@@ -1,4 +1,4 @@
-package mail_box.bai_1.model;
+package mail_box.model;
 
 public class Mail {
     private int id;

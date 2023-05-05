@@ -1,16 +1,13 @@
-package mail_box.bai_1.repository;
+package mail_box.service;
 
-import mail_box.bai_1.model.Mail;
+import mail_box.model.Mail;
 
 import java.util.List;
 
-public interface IMailRepository {
+public interface IMailService {
     List<Mail> findAll();
     void update(Mail mail);
-
     Mail findById(int id);
-
     List<String> findLanguage();
     List<Integer> findPageSize();
-
 }

@@ -1,7 +1,7 @@
-package mail_box.bai_1.controller;
+package mail_box.controller;
 
-import mail_box.bai_1.model.Mail;
-import mail_box.bai_1.service.IMailService;
+import mail_box.model.Mail;
+import mail_box.service.IMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

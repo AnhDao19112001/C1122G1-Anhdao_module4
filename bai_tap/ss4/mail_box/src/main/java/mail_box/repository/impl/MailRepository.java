@@ -1,6 +1,7 @@
-package mail_box.bai_1.repository;
+package mail_box.repository.impl;
 
-import mail_box.bai_1.model.Mail;
+import mail_box.model.Mail;
+import mail_box.repository.IMailRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
