@@ -1,4 +1,4 @@
-package com.example.bai_tap_3.model;
+package com.example.model;
 
 public class Product {
     private int id;

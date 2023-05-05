@@ -1,10 +1,10 @@
-package com.example.bai_tap_3.service;
+package com.example.repository;
 
-import com.example.bai_tap_3.model.Product;
+import com.example.model.Product;
 
 import java.util.List;
 
-public interface IProductService {
+public interface IProductRepository {
     List<Product> findAll();
     void save(Product product);
     Product findById(int id);

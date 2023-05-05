@@ -1,7 +1,7 @@
-package com.example.bai_tap_3.controller;
+package com.example.controller;
 
-import com.example.bai_tap_3.model.Product;
-import com.example.bai_tap_3.service.IProductService;
+import com.example.model.Product;
+import com.example.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,20 +42,16 @@ public class ProductController {
         model.addAttribute("product", iProductService.findById(id));
         return "/edit";
     }
-    @PostMapping("/update")
+    @PostMapping("/edit")
     public String update(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         iProductService.edit(product);
         redirectAttributes.addFlashAttribute("mess", "Update product successful!");
         return "redirect:/";
     }
-    @GetMapping("/delete/{id}")
-    private String delete(@PathVariable int id, Model model) {
-        model.addAttribute("product", iProductService.findById(id));
-        return "/delete";
-    }
-    @PostMapping("/delete")
-    public String delete(Product product, RedirectAttributes redirectAttributes) {
-        iProductService.delete(product.getId());
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam Integer idDelete, RedirectAttributes redirectAttributes) {
+        iProductService.delete(idDelete);
         redirectAttributes.addFlashAttribute("mess", "Remove product successful!");
         return "redirect:/";
     }

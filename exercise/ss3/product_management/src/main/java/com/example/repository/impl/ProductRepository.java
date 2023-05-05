@@ -1,6 +1,7 @@
-package com.example.bai_tap_3.repository;
+package com.example.repository.impl;
 
-import com.example.bai_tap_3.model.Product;
+import com.example.model.Product;
+import com.example.repository.IProductRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

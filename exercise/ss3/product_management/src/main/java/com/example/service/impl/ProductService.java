@@ -1,8 +1,8 @@
-package com.example.bai_tap_3.service;
+package com.example.service.impl;
 
-import com.example.bai_tap_3.model.Product;
-import com.example.bai_tap_3.repository.IProductRepository;
-import com.example.bai_tap_3.repository.ProductRepository;
+import com.example.model.Product;
+import com.example.repository.IProductRepository;
+import com.example.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
