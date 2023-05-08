@@ -59,7 +59,7 @@ public class ProductRepository implements IProductRepository {
         return product;
     }
     @Override
-    public void update(Product product) {
+    public void edit(Product product) {
         Transaction transaction = null;
         Session session = null;
         try {
@@ -78,7 +78,7 @@ public class ProductRepository implements IProductRepository {
         }
     }
     @Override
-    public void remove(int id) {
+    public void delete(int id) {
         Transaction transaction = null;
         Session session = null;
         Product product = findById(id);
