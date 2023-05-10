@@ -35,11 +35,11 @@ public class BlogService implements IBlogService {
 
     @Override
     public Blog findById(int id) {
-        return iBlogRepository.findById(id);
+        return iBlogRepository.findById(id).get();
     }
 
     @Override
     public List<Blog> findByName(String title) {
-        return null;
+        return iBlogRepository.findByTitle(title);
     }
 }

@@ -45,14 +45,15 @@ public class BlogController {
     }
     @GetMapping("/search")
     public String searchName(@RequestParam String title, Model model){
-        model.addAttribute("blogs", iBlogService.findByName(title));
+        List<Blog> blogList = iBlogService.findByName(title);
+        model.addAttribute("blogs", blogList);
         return "/list";
     }
-    @GetMapping("/search")
-    public String searchId(@RequestParam int id, Model model){
-        model.addAttribute("blogs", iBlogService.findById(id));
-        return "/list";
-    }
+//    @GetMapping("/search/{name}")
+//    public String searchId(@RequestParam int id, Model model){
+//        model.addAttribute("blogs", iBlogService.findById(id));
+//        return "/list";
+//    }
     @GetMapping("/update/{id}")
     public String update(@PathVariable int id, Model model){
         model.addAttribute("blog", iBlogService.findById(id));
