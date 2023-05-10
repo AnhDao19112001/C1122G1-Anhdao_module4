@@ -39,6 +39,6 @@ public class BlogController {
         model.addAttribute("categoryList", iCategoryService.findAll());
         return "blog/create";
     }
-    
+
 }
 
