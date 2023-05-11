@@ -17,7 +17,10 @@ public interface IBlogService {
     void update(Blog blog);
 
     Blog findById(int id);
-Page<Blog> findAll(Pageable pageable);
+
+    Page<Blog> findAll(Pageable pageable);
+
     Page<Blog> findByTitle(String title, Pageable pageable);
+
     List<BlogDto> showListDto();
 }

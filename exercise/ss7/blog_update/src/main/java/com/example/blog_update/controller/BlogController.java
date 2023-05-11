@@ -8,9 +8,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class BlogController {
@@ -34,11 +33,46 @@ public class BlogController {
         return "blog/dto";
     }
     @GetMapping("/add")
-    public String save(Model model){
+    public String create(Model model){
         model.addAttribute("blog", new Blog());
         model.addAttribute("categoryList", iCategoryService.findAll());
         return "blog/create";
     }
-
+    @PostMapping("/save")
+    public String save(Blog blog, RedirectAttributes redirectAttributes){
+        iBlogService.save(blog);
+        redirectAttributes.addFlashAttribute("smg","Add new successful!");
+        return "redirect:/";
+    }
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable int id, Model model){
+        model.addAttribute("blog",iBlogService.findById(id));
+        model.addAttribute("categoryList", iCategoryService.findAll());
+        return "blog/edit";
+    }
+    @PostMapping("/update")
+    public String update(@ModelAttribute Blog blog, RedirectAttributes redirectAttributes){
+        iBlogService.update(blog);
+        redirectAttributes.addFlashAttribute("smg","Update successful!");
+        return "redirect:/";
+    }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable int id, Model model){
+        model.addAttribute("blog",iBlogService.findById(id));
+        model.addAttribute("categoryList", iCategoryService.findAll());
+        return "blog/delete";
+    }
+    @PostMapping("/delete")
+    public String delete(@ModelAttribute Blog blog, RedirectAttributes redirectAttributes){
+        iBlogService.delete(blog.getId());
+        redirectAttributes.addFlashAttribute("smg","Delete successful!");
+        return "redirect:/";
+    }
+    @GetMapping("/view/{id}")
+    public String view(@PathVariable int id, Model model){
+        model.addAttribute("blog",iBlogService.findById(id));
+        model.addAttribute("categoryList", iCategoryService.findAll());
+        return "blog/view";
+    }
 }
 
