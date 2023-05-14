@@ -10,17 +10,17 @@ import javax.validation.constraints.Size;
 public class MusicDto implements Validator {
     private int id;
 
-    @NotBlank(message = "Tên bài hát không được để trống.")
+    @NotNull(message = "Tên bài hát không được để trống.")
     @Size(max = 800, message = "Tên bài hát không được quá 800 ký tự.")
     @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "Tên bài hát không chứa các kí tự đặc biệt như @;,.=-+,...")
     private String name;
 
-    @NotBlank(message = "Tên nghệ sĩ không được để trống.")
+    @NotNull(message = "Tên nghệ sĩ không được để trống.")
     @Size(max = 300, message = "Tên nghệ sĩ không được quá 300 ký tự.")
     @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "Tên nghệ sĩ không chứa các kí tự đặc biệt như @;,.=-+,...")
     private String singer;
 
-    @NotBlank(message = "Tên thể loại không được để trống.")
+    @NotNull(message = "Tên thể loại không được để trống.")
     @Size(max = 1000, message = "Tên thể loại không được quá 1000 ký tự.")
     @Pattern(regexp = "^[a-zA-Z0-9, ]*$", message = "Tên thể loại không chứa các kí tự đặc biệt (ngoại trừ dấu ',').")
     private String category;
