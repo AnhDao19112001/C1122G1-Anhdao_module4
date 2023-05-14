@@ -10,6 +10,5 @@ import java.util.List;
 public interface IBookService {
     List<Book> findAll();
     void save(Book book);
-    Book findById(int id);
-    boolean findByCode(String code);
+    Book findById(Integer id);
 }

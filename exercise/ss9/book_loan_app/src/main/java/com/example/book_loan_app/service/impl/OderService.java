@@ -19,8 +19,18 @@ public class OderService implements IOderService {
     }
 
     @Override
-    public String setCode() {
-        return String.format("%5d",(int) (Math.random() * 10000));
+    public void save(Oder oder) {
+        iOderRepository.save(oder);
+    }
+
+    @Override
+    public Oder findByCode(String code) {
+        return iOderRepository.findByCode(code);
+    }
+
+    @Override
+    public void delete(int id) {
+        iOderRepository.deleteById(id);
     }
 
 

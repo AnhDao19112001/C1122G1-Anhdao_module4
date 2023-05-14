@@ -1,9 +1,7 @@
 package com.example.book_loan_app.service.impl;
 
 import com.example.book_loan_app.model.Book;
-import com.example.book_loan_app.model.Oder;
 import com.example.book_loan_app.repository.IBookRepository;
-import com.example.book_loan_app.repository.IOderRepository;
 import com.example.book_loan_app.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +12,7 @@ import java.util.List;
 public class BookService implements IBookService {
     @Autowired
     private IBookRepository iBookRepository;
-    @Autowired
-    private IOderRepository oderRepository;
+
     @Override
     public List<Book> findAll() {
         return iBookRepository.findAll();
@@ -27,17 +24,9 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public Book findById(int id) {
-        return iBookRepository.findById(id);
+    public Book findById(Integer id) {
+        return iBookRepository.getById(id);
     }
-    @Override
-    public boolean findByCode(String code) {
-        Oder oder =  this.oderRepository.findByCode(code);
-        Book book = this.iBookRepository.findById(oder.getBook().getId()).orElse(null);
-        book.setQuantity(book.getQuantity()+1);
-        iBookRepository.save(book);
-        oderRepository.deleteById(oder.getId());
-        return true;
-    }
+
 
 }

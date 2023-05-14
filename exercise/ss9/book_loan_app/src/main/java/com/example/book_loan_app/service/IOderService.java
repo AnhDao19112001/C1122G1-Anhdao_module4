@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IOderService {
     List<Oder> findAll();
-
-    String setCode();
-
+    void save(Oder oder);
+    Oder findByCode(String code);
+    void delete(int id);
 
 }

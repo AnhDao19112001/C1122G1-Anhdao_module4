@@ -14,19 +14,19 @@ public class Book {
     private String author;
     private Integer quantity;
 
-    @OneToMany(mappedBy = "book")
-    private Set<Oder> oderList;
+//    @OneToMany(mappedBy = "book")
+//    private Set<Oder> oderList;
 
     public Book() {
     }
 
-    public Book(Integer id, String name, String category, String author, Integer quantity, Set<Oder> oderList) {
+    public Book(Integer id, String name, String category, String author, Integer quantity) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.author = author;
         this.quantity = quantity;
-        this.oderList = oderList;
+//        this.oderList = oderList;
     }
 
     public Integer getId() {
@@ -69,11 +69,11 @@ public class Book {
         this.quantity = quantity;
     }
 
-    public Set<Oder> getOderList() {
-        return oderList;
-    }
+//    public Set<Oder> getOderList() {
+//        return oderList;
+//    }
 
-    public void setOderList(Set<Oder> oderList) {
-        this.oderList = oderList;
-    }
+//    public void setOderList(Set<Oder> oderList) {
+//        this.oderList = oderList;
+//    }
 }

@@ -10,28 +10,24 @@ public class Oder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String code;
-    private Date date;
+    private int bookId;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
-    private Book book;
+//    @ManyToOne
+//    @JoinColumn(name = "book_id", referencedColumnName = "id")
+//    private Book book;
 
     public Oder() {
     }
 
-    public Oder(int id, String code, Date date, Book book) {
+    public Oder(int id, String code, int bookId) {
         this.id = id;
         this.code = code;
-        this.date = date;
-        this.book = book;
+        this.bookId = bookId;
     }
 
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
+    public Oder(String code, int bookId) {
+        this.code = code;
+        this.bookId = bookId;
     }
 
     public int getId() {
@@ -50,11 +46,11 @@ public class Oder {
         this.code = code;
     }
 
-    public Date getDate() {
-        return date;
+    public int getBookId() {
+        return bookId;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 }
