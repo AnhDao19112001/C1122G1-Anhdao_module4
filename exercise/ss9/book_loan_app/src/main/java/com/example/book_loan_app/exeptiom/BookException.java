@@ -1,4 +1,4 @@
-package com.example.book_loan_app.logger;
+package com.example.book_loan_app.exeptiom;
 
 public class BookException extends Exception{
 }

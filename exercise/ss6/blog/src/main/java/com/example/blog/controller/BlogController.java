@@ -49,11 +49,6 @@ public class BlogController {
         model.addAttribute("blogs", blogList);
         return "/list";
     }
-//    @GetMapping("/search/{name}")
-//    public String searchId(@RequestParam int id, Model model){
-//        model.addAttribute("blogs", iBlogService.findById(id));
-//        return "/list";
-//    }
     @GetMapping("/update/{id}")
     public String update(@PathVariable int id, Model model){
         model.addAttribute("blog", iBlogService.findById(id));

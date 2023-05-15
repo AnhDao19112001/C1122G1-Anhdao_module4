@@ -1,6 +1,6 @@
 package com.example.book_loan_app.controller;
 
-import com.example.book_loan_app.logger.BookException;
+import com.example.book_loan_app.exeptiom.BookException;
 import com.example.book_loan_app.model.Book;
 import com.example.book_loan_app.model.Oder;
 import com.example.book_loan_app.service.IBookService;
@@ -44,7 +44,7 @@ public class BookController {
         book.setQuantity(book.getQuantity() - 1);
         bookService.save(book);
 
-        String loanCode = String.valueOf(new Random().nextInt(90000) + 10000);
+        String loanCode  = oderService.findByCode();
         Oder oder = new Oder(loanCode, book.getId());
         oderService.save(oder);
 
@@ -58,19 +58,32 @@ public class BookController {
     }
 
     @PostMapping("/pay")
-    public String getPayBook(@RequestParam String code, RedirectAttributes redirectAttributes) {
-        Oder oder = oderService.findByCode(code);
-        if (oder == null) {
-            redirectAttributes.addAttribute("msg", "Mã mượn sách không đúng vui lòng nhập lại!");
-            return "redirect:/pay_book";
-        } else {
-            Book book = bookService.findById(oder.getBookId());
+    public String getPayBook(@RequestParam String code, RedirectAttributes redirectAttributes) throws BookException{
+        List<Oder> oderList = oderService.findAll();
+        for (int i = 0; i < oderList.size(); i++) {
+            if (code.equals(oderList.get(i).getCode())){
+                Book book = bookService.findById(oderList.get(i).getBookId());
             book.setQuantity(book.getQuantity() + 1);
             bookService.save(book);
-            oderService.delete(oder.getId());
+            oderService.delete(oderList.get(i).getId());
             redirectAttributes.addAttribute("msg", "Đã trả sách thành công! " + book.getName());
             return "redirect:/";
+            }
         }
+        throw new BookException();
+
+
+//        if (oder == null) {
+//            redirectAttributes.addAttribute("msg", "Mã mượn sách không đúng vui lòng nhập lại!");
+//            return "redirect:/pay_book";
+//        } else {
+//            Book book = bookService.findById(oder.getBookId());
+//            book.setQuantity(book.getQuantity() + 1);
+//            bookService.save(book);
+//            oderService.delete(oder.getId());
+//            redirectAttributes.addAttribute("msg", "Đã trả sách thành công! " + book.getName());
+//            return "redirect:/";
+//        }
     }
 
     @ExceptionHandler(BookException.class)

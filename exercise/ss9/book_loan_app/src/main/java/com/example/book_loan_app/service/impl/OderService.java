@@ -1,4 +1,5 @@
 package com.example.book_loan_app.service.impl;
+
 import com.example.book_loan_app.model.Oder;
 import com.example.book_loan_app.repository.IOderRepository;
 import com.example.book_loan_app.service.IOderService;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class OderService implements IOderService {
@@ -24,8 +26,15 @@ public class OderService implements IOderService {
     }
 
     @Override
-    public Oder findByCode(String code) {
-        return iOderRepository.findByCode(code);
+    public String findByCode() {
+        String code = String.valueOf(new Random().nextInt(90000) + 10000);
+        List<Oder> oderList = findAll();
+        for (int i = 0; i < oderList.size(); i++) {
+            if (code.equals(oderList.get(i).getCode())) {
+                code = String.valueOf(new Random().nextInt(90000) + 10000);
+            }
+        }
+        return code;
     }
 
     @Override
