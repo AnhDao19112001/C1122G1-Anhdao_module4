@@ -12,9 +12,9 @@ public class Oder {
     private String code;
     private int bookId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "book_id", referencedColumnName = "id")
-//    private Book book;
+    @ManyToOne
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private Book book;
 
     public Oder() {
     }

@@ -69,7 +69,7 @@ public class BookController {
             bookService.save(book);
             oderService.delete(oder.getId());
             redirectAttributes.addAttribute("msg", "Đã trả sách thành công! " + book.getName());
-            return "/redirect:/";
+            return "redirect:/";
         }
     }
 
