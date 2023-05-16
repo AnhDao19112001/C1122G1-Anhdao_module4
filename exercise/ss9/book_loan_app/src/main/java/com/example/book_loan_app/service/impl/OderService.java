@@ -1,5 +1,6 @@
 package com.example.book_loan_app.service.impl;
 
+import com.example.book_loan_app.model.Book;
 import com.example.book_loan_app.model.Oder;
 import com.example.book_loan_app.repository.IOderRepository;
 import com.example.book_loan_app.service.IOderService;
@@ -14,6 +15,7 @@ import java.util.Random;
 public class OderService implements IOderService {
     @Autowired
     private IOderRepository iOderRepository;
+
 
     @Override
     public List<Oder> findAll() {
@@ -32,6 +34,7 @@ public class OderService implements IOderService {
         for (int i = 0; i < oderList.size(); i++) {
             if (code.equals(oderList.get(i).getCode())) {
                 code = String.valueOf(new Random().nextInt(90000) + 10000);
+                i =0;
             }
         }
         return code;
@@ -42,5 +45,16 @@ public class OderService implements IOderService {
         iOderRepository.deleteById(id);
     }
 
-
+    @Override
+    public void returnBook(String code) {
+        List<Oder> oderList = iOderRepository.findAll();
+        for (int i = 0; i < oderList.size(); i++) {
+            if (code.equals(oderList.get(i).getCode())) {
+                Book book = bookService.findById(oderList.get(i).getBookId());
+                book.setQuantity(book.getQuantity() + 1);
+                bookService.save(book);
+                oderService.delete(oderList.get(i).getId());
+            }
+        }
+    }
 }

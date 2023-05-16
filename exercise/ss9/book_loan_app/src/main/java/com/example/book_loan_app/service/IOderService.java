@@ -10,5 +10,5 @@ public interface IOderService {
     String findByCode();
     void delete(int id);
 
-
+    void returnBook(String code);
 }

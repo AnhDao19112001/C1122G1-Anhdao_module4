@@ -58,18 +58,18 @@ public class BookController {
     }
 
     @PostMapping("/pay")
-    public String getPayBook(@RequestParam String code, RedirectAttributes redirectAttributes) throws BookException{
-        List<Oder> oderList = oderService.findAll();
-        for (int i = 0; i < oderList.size(); i++) {
-            if (code.equals(oderList.get(i).getCode())){
-                Book book = bookService.findById(oderList.get(i).getBookId());
-            book.setQuantity(book.getQuantity() + 1);
-            bookService.save(book);
-            oderService.delete(oderList.get(i).getId());
-            redirectAttributes.addAttribute("msg", "Đã trả sách thành công! " + book.getName());
+    public String getPayBook(@RequestParam String code, RedirectAttributes redirectAttributes) throws BookException {
+
+
+//        Oder oder = oderService.findByCode(code);
+//
+//        if(oder == null) {
+//
+//        }
+
+            redirectAttributes.addFlashAttribute("msg", "Đã trả sách thành công! " + book.getName());
             return "redirect:/";
             }
-        }
         throw new BookException();
 
 
