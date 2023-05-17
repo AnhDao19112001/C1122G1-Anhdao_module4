@@ -13,6 +13,7 @@
 
 <h2>Giỏ hàng của bạn</h2>
 <p><a href="/shop">Quay về trang chính</a></p>
+<p style="color: red" th:text="${msg}"></p>
 <form th:action="@{/shop}" th:object="${cart}" method="post">
     <h3>Tổng số mặt hàng: <span th:text="${cart.countItemQuantity()}"></span></h3>
     <h3>Tổng số sản phẩm: <span th:text="${cart.countProductQuantity()}"></span></h3>
@@ -44,6 +45,9 @@
             <td th:text="${cart.countTotalPayment()}"></td>
         </tr>
     </table>
+    <a th:href="@{/payment}"  class="btn btn-primary btn-sm">
+        Thanh toán
+    </a>
 </form>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

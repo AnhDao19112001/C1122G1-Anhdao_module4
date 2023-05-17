@@ -5,6 +5,7 @@ import com.example.cart.model.Product;
 import com.example.cart.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
@@ -63,4 +64,10 @@ public class ProductController {
         cart.removeProduct(productOptional.get());
         return "redirect:/shop";
     }
+    @GetMapping("/view/{id}")
+    public String view(@PathVariable Long id, Model model){
+        model.addAttribute("product",iProductService.findById(id).get());
+        return "/view";
+    }
+
 }

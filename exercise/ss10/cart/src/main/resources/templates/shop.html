@@ -23,6 +23,7 @@
         <th>Giảm giá</th>
         <th>Chi tiết</th>
         <th>Mua</th>
+        <th>Chi tiết sản phẩm</th>
     </tr>
     </thead>
     <tbody>
@@ -37,6 +38,7 @@
         <td th:text="${product.discount}"></td>
         <td th:text="${product.description}"></td>
         <td><a th:href="@{/add/__${product.id}__(action='list')}">Thêm vào giỏ hàng</a></td>
+        <td><a class="btn btn-primary" th:href="@{/view/__${product.id}__}">Xem chi tiết</a></td>
     </tr>
     </tbody>
 </table>

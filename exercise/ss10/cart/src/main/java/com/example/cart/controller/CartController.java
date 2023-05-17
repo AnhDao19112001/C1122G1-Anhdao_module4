@@ -20,4 +20,15 @@ public class CartController {
         modelAndView.addObject("cart", cart);
         return modelAndView;
     }
+    @GetMapping("/payment")
+    public ModelAndView payment(@SessionAttribute Cart cart){
+
+        ModelAndView modelAndView = new ModelAndView("cart");
+        if (cart.removeAllProduct()){
+            modelAndView.addObject("msg","Ban đã thanh toán thành công!");
+        }else {
+            modelAndView.addObject("msg", "Giỏ hàng rỗng vui lòng chọn mua trước khi thanh toán!");
+        }
+        return modelAndView;
+    }
 }
