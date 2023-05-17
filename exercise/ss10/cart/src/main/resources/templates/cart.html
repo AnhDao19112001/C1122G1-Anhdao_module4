@@ -19,18 +19,22 @@
     <table border="1">
         <tr>
             <th>Tên sản phẩm</th>
+            <th>Ảnh</th>
             <th>Số lượng</th>
             <th>Giá</th>
         </tr>
         <tr th:each="product: ${cart.products}">
             <td th:text="${product.getKey().name}"></td>
+            <td><img src="https://antimatter.vn/wp-content/uploads/2022/11/hinh-anh-gai-xinh-viet-nam.jpg"
+                     th:width="70"></td>
             <td>
-
-                <a class="m-2" id="delete_button" th:href="@{/delete/__${product.getKey().id}__(action='show')}" th:text="${'x'}"></a>
-                <a class="m-2" id="decrease_button" th:href="@{/down/__${product.getKey().id}__(action='show')}" th:text="${'-'}"></a>
+                <a class="m-2" id="delete_button" style="text-decoration: none; color: black" th:href="@{/delete/__${product.getKey().id}__(action='show')}"
+                   th:text="${'Xóa'}"></a>
+                <a class="m-2" id="decrease_button" style="text-decoration: none; color: black" th:href="@{/down/__${product.getKey().id}__(action='show')}"
+                   th:text="${'Giảm'}"></a>
                 <span th:text="${product.getValue()}"></span>
-                <a class="m-2" id="increase_button" th:href="@{/add/__${product.getKey().id}__(action='show')}"
-                   th:text="${'+'}"></a>
+                <a class="m-2" id="increase_button" style="text-decoration: none; color: black" th:href="@{/add/__${product.getKey().id}__(action='show')}"
+                   th:text="${'Tăng'}"></a>
             </td>
             <td th:text="${product.getKey().price}"></td>
         </tr>

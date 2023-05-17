@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.Optional;
 
 @Controller
@@ -64,17 +63,4 @@ public class ProductController {
         cart.removeProduct(productOptional.get());
         return "redirect:/shop";
     }
-//    @GetMapping("/deleteAll/{id}")
-//    public String deleteAllToCart(@PathVariable Long id, @ModelAttribute Cart cart, @RequestParam("action") String action){
-//        Optional<Product> productOptional = iProductService.findById(id);
-//        if (!productOptional.isPresent()){
-//            return "/error.404";
-//        }
-//        if (action.equals("show")){
-//            cart.removeAllProduct(productOptional.get());
-//            return "redirect:/shop_cart";
-//        }
-//        cart.removeAllProduct(productOptional.get());
-//        return "redirect:/shop";
-//    }
 }
