@@ -39,7 +39,7 @@ public class BlogController {
         return new ResponseEntity<>(blogList, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/view")
     public ResponseEntity<Blog> showBlog(@PathVariable int id) {
         Optional<Blog> blog = iBlogService.findById(id);
 
