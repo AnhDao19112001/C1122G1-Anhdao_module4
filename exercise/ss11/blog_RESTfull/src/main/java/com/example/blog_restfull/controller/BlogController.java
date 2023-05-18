@@ -2,7 +2,6 @@ package com.example.blog_restfull.controller;
 
 import com.example.blog_restfull.model.Blog;
 import com.example.blog_restfull.service.IBlogService;
-import com.example.blog_restfull.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/blogs")
+@CrossOrigin("*")
 public class BlogController {
     @Autowired
     private IBlogService iBlogService;
@@ -47,5 +47,9 @@ public class BlogController {
             return new ResponseEntity<>(blog.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    @GetMapping("/list")
+    public ResponseEntity<List<Blog>> getBlogLists(){
+        return new ResponseEntity<>(this.iBlogService.findAll(), HttpStatus.OK);
     }
 }
