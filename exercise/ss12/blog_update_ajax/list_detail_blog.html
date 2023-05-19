@@ -10,28 +10,25 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-
-<div>
-
-    <h1>Danh sách bài viết</h1>
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" name="search" id="search" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" onclick="getListBlog()" type="button">Search</button>
-    </form>
-    <table>
-        <thead>
-        <tr>
-            <td>STT</td>
-            <td>Tiêu đề</td>
-<!--            <td>Tên thể loại</td>-->
-            <td>Tác giả</td>
-            <td>Chi tiết</td>
-        </tr>
-        </thead>
-        <tbody id="listBlog"></tbody>
-    </table>
+<h1>Danh sách bài viết</h1>
+<form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="text" name="search" id="search" placeholder="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <td>STT</td>
+        <td>Tiêu đề</td>
+        <td>Tác giả</td>
+        <td>Chi tiết</td>
+    </tr>
+    </thead>
+    <tbody id="listBlog"></tbody>
+    <div id="content"></div>
+</table>
 </div>
-
+<button id="load-more" class="btn btn-outline-success my-2 my-sm-0">Tải lại</button>
 
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"></script>
@@ -39,70 +36,59 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-
 <script>
-    function listBlog(){
-        $.ajax({
-            url: 'http://localhost:8080/api/blogs/list',
-            type: "GET",
-            success: function (blog){
-                let getListBlogStr= '';
-                for (const blogElement of blog) {
-                    console.log(blog);
-                    getListBlogStr += `
-                    <tr>
-                       <td>${blogElement.id}</td>
-                        <td>${blogElement.title}</td>
-                        <td>${blogElement.author}</td>
-                        <td>${blogElement.description}</td>
-                    </tr>
-                    `;
-                }
-                $('#listBlog').html(getListBlogStr);
-            }
-        })
-    }
-    $(document).ready(function (){
-        listBlog();
-    });
-</script>
+    var page = 0;
 
-<script>
     function getListBlog() {
-        let search = $('#search').val();
-        let url = `http://localhost:8080/api/blogs?search=${search}`
-        console.log(search)
-        debugger
+        var search = $('#search').val();
+        var url = `http://localhost:8080/api/blogs?search=${search}&page=${page}`;
+
         $.ajax({
             url: url,
             type: "GET",
             success: function (blogs) {
-                console.log(blogs)
-                let listBlogStr = '';
-                for (let blog of blogs) {
-                    console.log(blogs);
+                var listBlogStr = '';
+                for (var i = 0; i < blogs.content.length; i++) {
                     listBlogStr += `
-                    <tr>
-                        <td>${blog.id}</td>
-                        <td>${blog.title}</td>
-                        <td>${blog.author}</td>
-                        <td>${blog.description}</td>
-                    </tr>
-                    `;
+            <tr>
+              <td>${blogs.content[i].id}</td>
+              <td>${blogs.content[i].title}</td>
+              <td>${blogs.content[i].author}</td>
+              <td>${blogs.content[i].description}</td>
+            </tr>
+          `;
                 }
                 $('#listBlog').html(listBlogStr);
             },
             error: function (err) {
                 console.log(err);
             }
-        })
+        });
     }
-    $(document).ready(function (){
+
+    function loadMore() {
+        var search = $('#search').val();
+        page++;
+        $.ajax({
+            url: `http://localhost:8080/api/blogs?search=${search}&page=${page}`,
+            method: "GET",
+            success: function (response) {
+                $('#content').append(response);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    $(document).ready(function () {
         getListBlog();
 
+        $('#load-more').click(function () {
+            loadMore();
+            getListBlog();
+        });
     });
 </script>
-
-
 </body>
 </html>

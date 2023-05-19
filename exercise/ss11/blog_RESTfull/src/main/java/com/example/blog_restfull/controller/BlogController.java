@@ -3,6 +3,9 @@ package com.example.blog_restfull.controller;
 import com.example.blog_restfull.model.Blog;
 import com.example.blog_restfull.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +21,9 @@ public class BlogController {
     private IBlogService iBlogService;
 
     @GetMapping
-    public ResponseEntity<List<Blog>> showBlogList(@RequestParam(value = "search", defaultValue = "") String titleSearch) {
-        List<Blog> blogList = iBlogService.searchByTitle(titleSearch);
+    public ResponseEntity<Page<Blog>> showBlogList(@RequestParam(value = "search", defaultValue = "") String titleSearch,
+                                                  @PageableDefault(size = 5) Pageable pageable) {
+        Page<Blog> blogList = iBlogService.searchByTitle(titleSearch, pageable);
 
         if (blogList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
